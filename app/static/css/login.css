@@ -1,0 +1,12 @@
+.form-sign{    
+    display: flex;
+    overflow-y: scroll;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 250px;
+  }
+
+ .asignup{
+  margin-top: 10px;
+ }

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="nav-var" >
+    {% if current_user.admin == 'admin' %}
+    <h3>Welcome <img class="img-icons"  src="{{ url_for('static', filename='icons/admin.png') }}" alt="icono-admin">
+        <strong>{{ current_user.username }}</strong>
+    </h3>
+    <a id="dashboard" href="{{ url_for('dashboard') }}">Dashboard</a>
+    {% else %}
+
+    <h5>Welcome <img class="img-user"  src="{{ url_for('static', filename='icons/user-fill.svg') }}" alt="icono-user">
+        {{ current_user.username }}
+    </h5>
+    {% endif %}
+
+    <a id="logout" href="{{ url_for('logout') }}">
+        <img class="img-logout" src="{{ url_for('static', filename='icons/logout.png') }}" alt="icon-logout">
+    </a>
+
+</div>
+
+<!-- usuarios conectados del lado del cliente frontend -->
+<!-- jquery library -->  
+<script src="{{ url_for('static', filename='libs/jquery/3.6.3/jquery.min.js') }}"></script>
+
+<!-- socket.io library -->
+<script src="{{ url_for('static', filename='libs/socket.io/4.0.1/socket.io.js') }}"></script>
+
+<!-- functions -->
+<!-- usaremos javascript y jquery para establecer el envio y recibo del lado del cliente frontend -->
+
+<script>
+
+    var socket = io();
+
+    socket.on('connect', function(){
+
+    });
+
+    socket.on('disconnect', function(){
+
+    });
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign-up{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap5.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block body %}
+
+  <form class="form-sign" method="POST" action="">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" >
+    {{ form.hidden_tag() }}
+    <h2 class="h2 mb-3 fw-normal" >Sign-up</h2>
+
+    {% with messages = get_flashed_messages() %}    
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-primary alert-dismissible" role="alert">
+      <strong>{{ message }}</strong>
+      <button type="button" id="btn-close1" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith%}
+
+    <div class="input-group mb3" >
+        {{ form.username(class="form-control") }}
+    </div>
+    <div class="input-group mb3" >
+        {{ form.email(class="form-control mt-2") }}
+    </div>
+    <div class="input-group mb3" >
+        {{ form.password(class="form-control mt-2") }}
+    </div>
+    {{ form.submit(class="btn btn-mb btn-primary mt-4") }}
+    <a class="asignup"  href="{{ url_for('login') }}">go to the login page</a>
+  </form>
+
+{% endblock %}

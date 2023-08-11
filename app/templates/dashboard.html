@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+<!-- estilos css para esta pagina-->
+{% block customCSS %}
+ <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap5.css') }}">
+ <style>
+    h2{
+        padding-top: 30px;
+    }
+    #data{
+        color: red;
+        margin-right: 10px;
+    }
+ </style>
+{% endblock %}
+
+<!-- dashboard.html -->
+{% block body %}
+<div>
+    <h2>
+        Dashboard
+    </h2>
+    <hr>
+    <h3>live users: <span id="data" ></span>{{ data }}</h3>
+    <a href="{{ url_for('home') }}">return to the home</a>
+</div>
+
+<!-- usuarios conectados del lado del cliente frontend -->
+<!-- jquery library -->  
+<script src="{{ url_for('static', filename='libs/jquery/3.6.3/jquery.min.js') }}"></script>
+
+<!-- socket.io library -->
+<script src="{{ url_for('static', filename='libs/socket.io/4.0.1/socket.io.js') }}"></script>
+
+<!-- functions -->
+<!-- usaremos javascript y jquery para establecer el envio y recibo del lado del cliente frontend -->
+
+<script>
+
+    var socket = io();
+     
+     
+    socket.on('user', function(data){
+        $("#data").text(data);
+    })
+
+    socket.on('connect', function(){
+
+    });
+
+    socket.on('disconnect', function(){
+
+    });
+
+</script>
+
+{% endblock %}
